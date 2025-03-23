@@ -4,7 +4,6 @@ import co.edu.icesi.introspringboot2.entity.Course;
 import co.edu.icesi.introspringboot2.entity.Enrollment;
 import co.edu.icesi.introspringboot2.entity.Student;
 import co.edu.icesi.introspringboot2.repository.EnrollmentRepository;
-import co.edu.icesi.introspringboot2.service.CourseService;
 import co.edu.icesi.introspringboot2.service.EnrollmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,15 +12,18 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class EnrollmentServiceImpl implements EnrollmentService {
 
+    private final EnrollmentRepository enrollmentRepository;
 
     @Autowired
-    private EnrollmentRepository enrollmentRepository;
+    public EnrollmentServiceImpl(EnrollmentRepository enrollmentRepository) {
+        this.enrollmentRepository = enrollmentRepository;
+    }
 
     @Override
     @Transactional
-    public void enrollStudent(long studentId, long coursId) {
+    public void enrollStudent(long studentId, long courseId) {
         var course = new Course();
-        course.setId(coursId);
+        course.setId(courseId);
 
         var student = new Student();
         student.setId(studentId);

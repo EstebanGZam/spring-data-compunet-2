@@ -1,0 +1,55 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es-ES">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Course</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="form-container">
+    <h2 class="text-center">Create Course</h2>
+    <form th:action="@{/course}" method="post" th:object="${course}">
+        <!-- Campo para el nombre del curso -->
+        <div class="mb-3">
+            <label for="name" class="form-label">Course Name:</label>
+            <input type="text" id="name" th:field="*{name}" class="form-control" required>
+        </div>
+
+        <!-- Selector de profesores -->
+        <div class="mb-3">
+            <label for="professors" class="form-label">Professors:</label>
+            <select id="professors" th:field="*{professor}" class="form-select">
+                <option th:each="professor : ${professors}" th:value="${professor.id}"
+                        th:text="${professor.name}"></option>
+            </select>
+        </div>
+
+        <!-- Botón de envío -->
+        <div class="d-grid">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+    <!-- Lista de estudiantes -->
+    <div class="card shadow">
+        <div class="card-body">
+            <h2 class="card-title mb-4">Lista de Cursos</h2>
+            <ul class="list-group">
+                <li th:each="entry : ${courses}"
+                    class="list-group-item d-flex justify-content-between align-items-center">
+                    <span th:text="${entry.getId()}"></span>
+                    <span th:text="${entry.getName()}"></span>
+                    <span th:text="${entry.getProfessor().getName()}"></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS (opcional, si necesitas funcionalidades de Bootstrap) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

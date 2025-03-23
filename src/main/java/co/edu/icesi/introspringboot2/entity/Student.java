@@ -7,7 +7,7 @@ import java.util.List;
 
 //POJOs
 @Entity
-@Table(name = "domi_students")
+@Table(name = "students")
 public class Student {
 
     @Id

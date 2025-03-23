@@ -1,5 +1,5 @@
 -- Insertar estudiantes
-INSERT INTO domi_students (id, code, name, program)
+INSERT INTO students (id, code, name, program)
 VALUES (1, 'A00001', 'Juan Pérez', 'SIS'),
        (2, 'A00002', 'María Gómez', 'SIS'),
        (3, 'A00003', 'Miguel Rodríguez', 'TEL'),
@@ -22,7 +22,7 @@ VALUES (1, 'A00001', 'Juan Pérez', 'SIS'),
        (20, 'A00020', 'Fernanda Espinosa', 'ENI');
 
 -- Insertar profesores
-INSERT INTO domi_professors (id, name)
+INSERT INTO professors (id, name)
 VALUES (1, 'Gabriel Tamura'),
        (2, 'Ángela Villota'),
        (3, 'Andrés Aristizábal'),
@@ -30,7 +30,7 @@ VALUES (1, 'Gabriel Tamura'),
        (5, 'Claudia Castiblanco');
 
 -- Insertar cursos
-INSERT INTO domi_courses (id, name, professor_id)
+INSERT INTO courses (id, name, professor_id)
 VALUES (1, 'Ingeniería de Software IV', 1),
        (2, 'Computación y estructuras discretas III', 2),
        (3, 'Computación y estructuras discretas II', 3),
@@ -38,19 +38,44 @@ VALUES (1, 'Ingeniería de Software IV', 1),
        (5, 'Proyecto Integrador I', 5);
 
 -- Insertar matriculas
-INSERT INTO domi_enrollments (id, student_id, course_id)
+INSERT INTO enrollments (id, student_id, course_id)
 VALUES
     -- Ingeniería de Software IV
-    (1, 1, 1), (2, 2, 1), (3, 6, 1), (4, 8, 1), (5, 13, 1),
+    (1, 1, 1),
+    (2, 2, 1),
+    (3, 6, 1),
+    (4, 8, 1),
+    (5, 13, 1),
 
     -- Computación y estructuras discretas III
-    (6, 1, 2), (7, 2, 2), (8, 3, 2), (9, 6, 2), (10, 14, 2),
+    (6, 1, 2),
+    (7, 2, 2),
+    (8, 3, 2),
+    (9, 6, 2),
+    (10, 14, 2),
 
     -- Computación y estructuras discretas II
-    (11, 3, 3), (12, 5, 3), (13, 10, 3), (14, 12, 3), (15, 18, 3),
+    (11, 3, 3),
+    (12, 5, 3),
+    (13, 10, 3),
+    (14, 12, 3),
+    (15, 18, 3),
 
     -- Ingeniería de Software III
-    (16, 1, 4), (17, 4, 4), (18, 6, 4), (19, 9, 4), (20, 13, 4),
+    (16, 1, 4),
+    (17, 4, 4),
+    (18, 6, 4),
+    (19, 9, 4),
+    (20, 13, 4),
 
     -- Proyecto Integrador I
-    (21, 7, 5), (22, 8, 5), (23, 11, 5), (24, 15, 5), (25, 20, 5);
+    (21, 7, 5),
+    (22, 8, 5),
+    (23, 11, 5),
+    (24, 15, 5),
+    (25, 20, 5);
+
+SELECT setval('professors_seq', (SELECT MAX(id) FROM professors));
+SELECT setval('students_seq', (SELECT MAX(id) FROM students));
+SELECT setval('courses_seq', (SELECT MAX(id) FROM courses));
+SELECT setval('enrollments_seq', (SELECT MAX(id) FROM enrollments));

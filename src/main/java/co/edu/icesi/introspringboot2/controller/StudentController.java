@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,16 +15,30 @@ import java.util.List;
 @RequestMapping("/student")
 public class StudentController {
 
-    private StudentService studentService;
-
+    private final StudentService studentService;
 
     public StudentController(@Qualifier("studentServiceImpl") StudentService studentService) {
         this.studentService = studentService;
     }
 
+    @GetMapping
+    public String home(Model model) {
+        var students = studentService.getAllStudents();
+        model.addAttribute("message", "Hello desde Computación en Internet 2");
+        model.addAttribute("students", students);
+        model.addAttribute("student", new Student());
+        return "student";
+    }
+
+    @PostMapping
+    public String saveStudent(@ModelAttribute Student student) {
+        studentService.createStudent(student);
+        return "redirect:/student";
+    }
+
     @GetMapping("/all")
     @ResponseBody
-    public ResponseEntity< List<Student> > all() {
+    public ResponseEntity<List<Student>> all() {
         var list = studentService.getByProgram("SIS");
         return ResponseEntity.status(200).body(list);
     }

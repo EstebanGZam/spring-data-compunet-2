@@ -4,7 +4,7 @@ package co.edu.icesi.introspringboot2.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "domi_enrollments")
+@Table(name = "enrollments")
 public class Enrollment {
 
     @Id
