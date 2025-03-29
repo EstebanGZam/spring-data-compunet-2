@@ -79,3 +79,7 @@ SELECT setval('professors_seq', (SELECT MAX(id) FROM professors));
 SELECT setval('students_seq', (SELECT MAX(id) FROM students));
 SELECT setval('courses_seq', (SELECT MAX(id) FROM courses));
 SELECT setval('enrollments_seq', (SELECT MAX(id) FROM enrollments));
+
+INSERT INTO users (email, password)
+VALUES ('usuario@example.com', '$2a$12$DwaBLM.ZQ9VBcVZZDHE8muA2XTiR8DxgsJs52oaHusPPcpct6qbWS');
+-- Contraseña: password

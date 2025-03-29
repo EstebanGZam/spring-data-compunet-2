@@ -1,10 +1,10 @@
 package co.edu.icesi.introspringboot2.controller;
 
 import co.edu.icesi.introspringboot2.entity.Course;
+import co.edu.icesi.introspringboot2.entity.Student;
 import co.edu.icesi.introspringboot2.service.CourseService;
 import co.edu.icesi.introspringboot2.service.ProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -41,10 +41,18 @@ public class CourseController {
     }
 
     @GetMapping("/all")
-    @ResponseBody
-    public ResponseEntity<List<Course>> create() {
-        var list = courseService.listCourseOfStudent(1);
-        return ResponseEntity.status(200).body(list);
+    public String all(Model model) {
+        var courses = courseService.getAllCourses();
+        model.addAttribute("courses", courses);
+        return "courses";
     }
 
+    @GetMapping("/detail")
+    public String getStudents(Model model, @RequestParam Long courseId) {
+        Course course = courseService.getCourseById(courseId);
+        List<Student> students = courseService.getStudentsByCourseId(courseId);
+        model.addAttribute("course", course);
+        model.addAttribute("students", students);
+        return "courseDetail";
+    }
 }

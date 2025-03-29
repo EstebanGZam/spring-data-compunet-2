@@ -1,0 +1,196 @@
+/* Variables de diseño */
+:root {
+    --primary: #4361ee;
+    --primary-light: #e6e9ff;
+    --secondary: #7209b7;
+    --dark: #2b2d42;
+    --light: #f8f9fa;
+    --gray: #6c757d;
+    --border: #e0e0e0;
+    --success: #4bb543;
+    --danger: #ff3333;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+    --radius: 8px;
+    --transition: all 0.3s ease;
+}
+
+/* Estilos base */
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    color: var(--dark);
+    background-color: #f5f7ff;
+    padding: 0;
+    margin: 0;
+}
+
+/* Contenedor principal */
+.student-info {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+}
+
+/* Encabezado */
+h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--primary-light);
+    position: relative;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100px;
+    height: 2px;
+    background: var(--secondary);
+}
+
+h2 {
+    color: var(--dark);
+    font-size: 1.5rem;
+    margin: 1.5rem 0 1rem;
+}
+
+/* Campos de información */
+.info-field {
+    display: flex;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.info-field:last-child {
+    border-bottom: none;
+}
+
+.label {
+    font-weight: 600;
+    min-width: 120px;
+    color: var(--primary);
+}
+
+/* Sección de materias */
+.courses-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px dashed var(--border);
+}
+
+.course-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0;
+}
+
+.course-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    background: var(--light);
+    border-radius: var(--radius);
+    transition: var(--transition);
+    gap: 1rem;
+}
+
+.course-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+    background: var(--primary-light);
+}
+
+.course-name {
+    font-weight: 500;
+    flex: 1;
+}
+
+.course-name:first-child {
+    font-family: monospace;
+    color: var(--gray);
+    font-size: 0.9rem;
+    flex: 0 0 60px;
+}
+
+.course-code {
+    font-size: 0.85rem;
+    color: var(--gray);
+    font-style: italic;
+}
+
+.no-courses {
+    color: var(--gray);
+    text-align: center;
+    padding: 1rem;
+    background: var(--light);
+    border-radius: var(--radius);
+}
+
+/* Enlace de volver */
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 2rem;
+    padding: 0.75rem 1.5rem;
+    color: white;
+    background: var(--primary);
+    text-decoration: none;
+    border-radius: var(--radius);
+    font-weight: 500;
+    transition: var(--transition);
+    gap: 0.5rem;
+}
+
+.back-link:hover {
+    background: var(--secondary);
+    transform: translateX(-5px);
+}
+
+.back-link::before {
+    content: "←";
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .student-info {
+        margin: 0;
+        padding: 1.5rem;
+        border-radius: 0;
+    }
+
+    .info-field {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .label {
+        min-width: auto;
+    }
+
+    .course-item {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .course-name:first-child {
+        flex: 0 0 100%;
+    }
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.courses-section {
+    animation: fadeIn 0.5s ease-out;
+}

@@ -57,4 +57,9 @@ public class StudentServiceImpl implements StudentService {
         return studentRepository.findAll();
     }
 
+    @Override
+    public Student getStudentByCode(String code) {
+        return studentRepository.getStudentByCode(code).orElseThrow();
+    }
+
 }

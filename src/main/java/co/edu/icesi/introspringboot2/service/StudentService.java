@@ -16,4 +16,6 @@ public interface StudentService {
     List<Student> getStudentsByCourse(Course course);
 
     List<Student> getAllStudents();
+
+    Student getStudentByCode(String code);
 }

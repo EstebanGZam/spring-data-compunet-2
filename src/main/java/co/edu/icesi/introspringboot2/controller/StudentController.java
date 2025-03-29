@@ -1,6 +1,7 @@
 package co.edu.icesi.introspringboot2.controller;
 
 import co.edu.icesi.introspringboot2.entity.Student;
+import co.edu.icesi.introspringboot2.service.CourseService;
 import co.edu.icesi.introspringboot2.service.StudentService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
@@ -16,9 +17,11 @@ import java.util.List;
 public class StudentController {
 
     private final StudentService studentService;
+    private final CourseService courseService;
 
-    public StudentController(@Qualifier("studentServiceImpl") StudentService studentService) {
+    public StudentController(@Qualifier("studentServiceImpl") StudentService studentService, CourseService courseService) {
         this.studentService = studentService;
+        this.courseService = courseService;
     }
 
     @GetMapping
@@ -58,5 +61,13 @@ public class StudentController {
         return ResponseEntity.status(200).body(pageResponse);
     }
 
+    @GetMapping("/detail")
+    public String detail(Model model, @RequestParam String code) {
+        var student = studentService.getStudentByCode(code);
+        var courses = courseService.listCourseOfStudent(student.getId());
+        model.addAttribute("student", student);
+        model.addAttribute("courses", courses);
+        return "studentDetail";
+    }
 
 }

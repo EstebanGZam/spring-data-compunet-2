@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es-ES" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Detalle del Curso</title>
+    <link rel="stylesheet" th:href="@{/css/courseDetail.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <h1>Detalle del Curso</h1>
+        <a th:href="@{/course/all}" class="back-button">← Volver a todos los cursos</a>
+    </header>
+
+    <div class="course-info">
+        <div class="course-header">
+            <span class="course-id" th:text="${course.id}"></span>
+            <h2 th:text="${course.name}"></h2>
+            <div class="professor-info" th:if="${course.professor != null}">
+                <span class="label">Profesor:</span>
+                <span class="professor-name" th:text="${course.professor.name}"></span>
+            </div>
+            <div class="professor-info" th:unless="${course.professor != null}">
+                <span class="label">Profesor:</span>
+                <span class="no-professor">No asignado</span>
+            </div>
+        </div>
+
+        <div class="enrollment-stats">
+            <div class="stat-card">
+                <span class="stat-value" th:text="${students.size()}"></span>
+                <span class="stat-label">Estudiantes matriculados</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="students-section">
+        <h3>Estudiantes Matriculados</h3>
+
+        <div th:if="${students.isEmpty()}" class="empty-message">
+            No hay estudiantes matriculados en este curso.
+        </div>
+
+        <ul th:unless="${students.isEmpty()}" class="student-list">
+            <li th:each="student : ${students}" class="student-card">
+                <a th:href="@{/student/detail(code=${student.getCode()})}" class="student-link">
+                    <span class="student-code" th:text="${student.getCode()}"></span>
+                    <h4 th:text="${student.getName()}"></h4>
+                    <span class="student-program" th:text="${student.getProgram()}"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

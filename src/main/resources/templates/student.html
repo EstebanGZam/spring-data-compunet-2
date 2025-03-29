@@ -5,48 +5,41 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/css/student.css}">
     <title>Students</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="bg-light">
-<div class="container mt-5">
-    <h1 class="text-center mb-4">Students</h1>
+<body>
+<h1>Students</h1>
 
-    <!-- Formulario -->
-    <form th:action="@{/student}" th:object="${student}" method="post" class="card p-4 mb-4 shadow">
-        <div class="mb-3">
-            <label for="code" class="form-label">Código:</label>
-            <input type="text" th:field="*{code}" class="form-control" id="code" required>
-        </div>
-        <div class="mb-3">
-            <label for="name" class="form-label">Nombre:</label>
-            <input type="text" th:field="*{name}" class="form-control" id="name" required>
-        </div>
-        <div class="mb-3">
-            <label for="program" class="form-label">Programa:</label>
-            <input type="text" th:field="*{program}" class="form-control" id="program" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Enviar</button>
-    </form>
-
-    <!-- Lista de estudiantes -->
-    <div class="card shadow">
-        <div class="card-body">
-            <h2 class="card-title mb-4">Lista de Estudiantes</h2>
-            <ul class="list-group">
-                <li th:each="entry : ${students}"
-                    class="list-group-item d-flex justify-content-between align-items-center">
-                    <span th:text="${entry.getCode()}"></span>
-                    <span th:text="${entry.getName()}"></span>
-                    <span th:text="${entry.getProgram()}"></span>
-                </li>
-            </ul>
-        </div>
+<!-- Formulario -->
+<form th:action="@{/student}" th:object="${student}" method="post">
+    <div>
+        <label for="code">Código:</label>
+        <input type="text" th:field="*{code}" id="code" required>
     </div>
-</div>
+    <div>
+        <label for="name">Nombre:</label>
+        <input type="text" th:field="*{name}" id="name" required>
+    </div>
+    <div>
+        <label for="program">Programa:</label>
+        <input type="text" th:field="*{program}" id="program" required>
+    </div>
+    <button type="submit">Enviar</button>
+</form>
 
-<!-- Bootstrap JS (opcional, si necesitas funcionalidades de Bootstrap) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Lista de estudiantes -->
+<div class="card">
+    <h2>Lista de Estudiantes</h2>
+    <ul>
+        <li th:each="entry : ${students}" class="clickable">
+            <a th:href="@{/student/detail(code=${entry.code})}" class="student-link">
+                <span th:text="${entry.code}"></span>
+                <span th:text="${entry.name}"></span>
+                <span th:text="${entry.program}"></span>
+            </a>
+        </li>
+    </ul>
+</div>
 </body>
 </html>

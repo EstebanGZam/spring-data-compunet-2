@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es-ES" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Información del Estudiante</title>
+    <link rel="stylesheet" th:href="@{/css/studentDetail.css}">
+</head>
+<body>
+
+<div class="student-info">
+    <h1>Información del Estudiante</h1>
+
+    <div class="info-field">
+        <span class="label">Código:</span>
+        <span th:text="${student.code}"></span>
+    </div>
+
+    <div class="info-field">
+        <span class="label">Nombre:</span>
+        <span th:text="${student.name}"></span>
+    </div>
+
+    <div class="info-field">
+        <span class="label">Programa:</span>
+        <span th:text="${student.program}"></span>
+    </div>
+
+    <!-- Sección de materias matriculadas -->
+    <div class="courses-section">
+        <h2>Materias Matriculadas</h2>
+
+        <div th:if="${courses.isEmpty()}">
+            <p class="no-courses">El estudiante no está matriculado en ninguna materia.</p>
+        </div>
+
+        <ul th:unless="${courses.isEmpty()}" class="course-list">
+            <li th:each="course : ${courses}" class="course-item">
+                <span class="course-name" th:text="${course.id}"></span>
+                <span class="course-name" th:text="${course.name}"></span>
+                <span class="course-code" th:text="'(' + ${course.professor.getName()} + ')'"></span>
+            </li>
+        </ul>
+    </div>
+
+    <a th:href="@{/student}" class="back-link">Volver a la lista</a>
+</div>
+
+</body>
+</html>

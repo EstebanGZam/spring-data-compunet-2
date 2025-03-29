@@ -1,0 +1,150 @@
+/* Estilos base */
+:root {
+    --primary-color: #3498db;
+    --primary-hover: #2980b9;
+    --background: #f5f7fa;
+    --card-bg: #ffffff;
+    --text-color: #2c3e50;
+    --border-color: #e0e0e0;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --border-radius: 8px;
+    --spacing: 16px;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    padding: var(--spacing);
+    background-color: var(--background);
+    color: var(--text-color);
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+h1, h2 {
+    color: var(--text-color);
+    text-align: center;
+    margin-bottom: var(--spacing);
+}
+
+/* Estilos del formulario */
+form {
+    background-color: var(--card-bg);
+    padding: calc(var(--spacing) * 1.5);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    margin-bottom: calc(var(--spacing) * 2);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+form div {
+    margin-bottom: var(--spacing);
+}
+
+label {
+    display: block;
+    margin-bottom: calc(var(--spacing) / 2);
+    font-weight: 600;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: calc(var(--spacing) / 1.5);
+    border: 1px solid var(--border-color);
+    border-radius: calc(var(--border-radius) / 2);
+    box-sizing: border-box;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: calc(var(--spacing) / 1.5) var(--spacing);
+    border: none;
+    border-radius: calc(var(--border-radius) / 2);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.3s;
+    width: 100%;
+    margin-top: calc(var(--spacing) / 2);
+}
+
+button:hover {
+    background-color: var(--primary-hover);
+}
+
+/* Estilos de la lista de estudiantes */
+.card {
+    background-color: var(--card-bg);
+    padding: calc(var(--spacing) * 1.5);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.2s;
+}
+
+li:last-child {
+    border-bottom: none;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.clickable:hover {
+    background-color: rgba(52, 152, 219, 0.05);
+}
+
+.student-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    padding: calc(var(--spacing) / 1.5);
+    justify-content: space-between;
+    align-items: center;
+}
+
+.student-link span {
+    flex: 1;
+    padding: 0 calc(var(--spacing) / 2);
+    text-align: left;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .student-link {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: calc(var(--spacing) / 3);
+    }
+
+    .student-link span {
+        width: 100%;
+        padding: 0;
+    }
+
+    form, .card {
+        padding: var(--spacing);
+    }
+}

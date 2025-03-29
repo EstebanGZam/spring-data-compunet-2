@@ -2,6 +2,7 @@ package co.edu.icesi.introspringboot2.service.impl;
 
 import co.edu.icesi.introspringboot2.entity.Course;
 import co.edu.icesi.introspringboot2.entity.Enrollment;
+import co.edu.icesi.introspringboot2.entity.Student;
 import co.edu.icesi.introspringboot2.repository.CourseRepository;
 import co.edu.icesi.introspringboot2.repository.EnrollmentRepository;
 import co.edu.icesi.introspringboot2.service.CourseService;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CourseServiceImpl implements CourseService {
@@ -57,6 +59,13 @@ public class CourseServiceImpl implements CourseService {
             throw new RuntimeException("Course not found");
         }
         courseRepository.deleteById(courseId);
+    }
+
+    @Override
+    public List<Student> getStudentsByCourseId(long courseId) {
+        var courseOptional = courseRepository.findCourseById(courseId);
+        Course course = courseOptional.orElseThrow();
+        return course.getEnrollments().stream().map(Enrollment::getStudent).collect(Collectors.toList());
     }
 
 }
