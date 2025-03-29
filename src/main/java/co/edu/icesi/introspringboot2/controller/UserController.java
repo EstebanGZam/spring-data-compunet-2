@@ -16,7 +16,7 @@ public class UserController {
         if (logout != null) {
             model.addAttribute("message", "Has cerrado sesión correctamente.");
         }
-        return "redirect:/student";
+        return "redirect:@{/student}";
     }
 
 }
