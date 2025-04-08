@@ -5,7 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class UserController {
+public class AuthController {
 
     // Muestra el formulario de login (Spring Security ya maneja el POST /login)
     @GetMapping("/login")
@@ -16,7 +16,17 @@ public class UserController {
         if (logout != null) {
             model.addAttribute("message", "Has cerrado sesión correctamente.");
         }
-        return "redirect:@{/student}";
+        return "login";
     }
 
+
+    @GetMapping("/signup")
+    public String showSignUpForm(Model model) {
+        return "home";
+    }
+
+    @GetMapping("/home")
+    public String showHomePage(Model model) {
+        return "home";
+    }
 }

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+</head>
+<body>
+<div class="home-container">
+    <header class="home-header">
+        <h1>¡Bienvenido!</h1>
+    </header>
+
+    <main class="home-content">
+        <div class="welcome-message">
+            <p>Has iniciado sesión correctamente en nuestro sistema.</p>
+            <p>Ahora puedes acceder a todas las funcionalidades disponibles.</p>
+        </div>
+
+        <div class="user-actions">
+            <!-- Botón de logout (importante: debe ser un POST) -->
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="logout-button">
+                    <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+                </button>
+            </form>
+        </div>
+    </main>
+
+</div>
+</body>
+</html>

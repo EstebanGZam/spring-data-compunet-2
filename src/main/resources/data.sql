@@ -80,6 +80,23 @@ SELECT setval('students_seq', (SELECT MAX(id) FROM students));
 SELECT setval('courses_seq', (SELECT MAX(id) FROM courses));
 SELECT setval('enrollments_seq', (SELECT MAX(id) FROM enrollments));
 
-INSERT INTO users (email, password)
-VALUES ('usuario@example.com', '$2a$12$DwaBLM.ZQ9VBcVZZDHE8muA2XTiR8DxgsJs52oaHusPPcpct6qbWS');
+-- Insertar usuarios
+INSERT INTO users (id, email, password)
+VALUES (1, 'estudiante@gmail.com', '$2a$12$LE5wWF2zJKLfE98E4KgJPO.buVfS0xHlSg2F2ciQMnk5kdgEBx506'),
+       (2, 'profesor@gmail.com', '$2a$12$LE5wWF2zJKLfE98E4KgJPO.buVfS0xHlSg2F2ciQMnk5kdgEBx506');
 -- Contraseña: password
+
+-- Insertar roles
+INSERT INTO roles (id, name)
+VALUES (1, 'ROLE_STUDENT'),
+       (2, 'ROLE_PROFESSOR');
+
+-- Definir relaciones
+INSERT INTO users_roles (user_id, role_id)
+VALUES (1, 1),
+       (2, 2);
+
+-- Configurar secuencia
+-- Usa estos nombres en lugar de users_seq y roles_seq
+SELECT setval('users_id_seq', (SELECT MAX(id) FROM users));
+SELECT setval('roles_id_seq', (SELECT MAX(id) FROM roles));
